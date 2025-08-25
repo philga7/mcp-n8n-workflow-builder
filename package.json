@@ -57,7 +57,7 @@
   },
   "homepage": "https://github.com/salacoste/mcp-n8n-workflow-builder",
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=20.8.1"
   },
   "workflowDeployment": {
     "target": "n8n.informedcrew.com",
