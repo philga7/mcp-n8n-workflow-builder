@@ -1,7 +1,7 @@
 {
   "name": "@kernel.salacoste/n8n-workflow-builder",
   "version": "0.8.0",
-  "description": "MCP (Model Context Protocol) server for managing n8n workflows through Claude AI and Cursor IDE with automated deployment to n8n.informedcrew.com",
+  "description": "MCP (Model Context Protocol) server for managing n8n workflows through Claude AI and Cursor IDE with MCP-based workflow management",
   "scripts": {
     "clean": "rm -rf build",
     "build": "tsc",
@@ -9,10 +9,7 @@
     "start": "node build/index.js",
     "release": "semantic-release",
     "release:dry-run": "semantic-release --dry-run",
-    "deploy:workflow": "node scripts/deploy-workflow.js",
-    "deploy:workflow:dry-run": "NODE_ENV=test node scripts/deploy-workflow.js",
-    "version:check": "semantic-release --dry-run --no-ci",
-    "workflow:test": "npm run build && npm run deploy:workflow:dry-run"
+    "version:check": "semantic-release --dry-run --no-ci"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.4.1",
@@ -46,7 +43,6 @@
     "cursor",
     "ai",
     "model-context-protocol",
-    "deployment",
     "semantic-release",
     "github-actions"
   ],
@@ -66,6 +62,6 @@
   "workflowDeployment": {
     "target": "n8n.informedcrew.com",
     "versioning": "semantic-release",
-    "automation": "github-actions"
+    "management": "mcp-based"
   }
 }

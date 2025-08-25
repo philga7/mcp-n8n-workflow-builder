@@ -1,6 +1,6 @@
 # Contributing to n8n Workflow Builder
 
-Thank you for your interest in contributing to the n8n Workflow Builder MCP Server! This document provides guidelines for contributing to the project, with a focus on semantic versioning, automated deployment, and MCP-based workflow management.
+Thank you for your interest in contributing to the n8n Workflow Builder MCP Server! This document provides guidelines for contributing to the project, with a focus on semantic versioning and MCP-based workflow management.
 
 ## Table of Contents
 
@@ -10,7 +10,6 @@ Thank you for your interest in contributing to the n8n Workflow Builder MCP Serv
 - [Workflow Development](#workflow-development)
 - [Pull Request Process](#pull-request-process)
 - [Semantic Versioning](#semantic-versioning)
-- [Deployment Process](#deployment-process)
 - [MCP-Based Workflow Management](#mcp-based-workflow-management)
 
 ## Code of Conduct
@@ -24,7 +23,7 @@ This project and everyone participating in it is governed by our Code of Conduct
 - Node.js (v14+ recommended)
 - npm
 - Git
-- Access to n8n.informedcrew.com (for testing workflows and deployments)
+- Access to n8n.informedcrew.com (for testing workflows)
 
 ### Development Setup
 
@@ -42,8 +41,7 @@ This project and everyone participating in it is governed by our Code of Conduct
 3. **Configure environment**
    - Copy `.config.json.example` to `.config.json`
    - Add your n8n API credentials
-   - Set up MCP server configuration (for interactive management)
-   - Set up GitHub secrets for automated deployment
+   - Set up MCP server configuration
 
 4. **Build the project**
    ```bash
@@ -206,20 +204,7 @@ The semantic-release tool automatically:
 | `docs`, `workflow-docs` | PATCH | Documentation updates |
 | `style`, `chore` | None | No version bump |
 
-## Deployment Process
 
-### Automated Deployment
-
-1. **Push to main branch**
-   - Triggers GitHub Actions workflow
-   - Runs tests and validation
-   - Deploys to n8n.informedcrew.com
-
-2. **Release Process**
-   - Semantic-release analyzes commits
-   - Creates new version if needed
-   - Generates changelog
-   - Creates GitHub release
 
 ## MCP-Based Workflow Management
 
@@ -234,35 +219,10 @@ The MCP Server provides a centralized management interface for deploying, updati
    - Place it in the `workflows/` directory
    - Name it descriptively (e.g., `cipher-weaviate-integration.json`)
 
-2. **Deploy Workflow**
-   ```bash
-   npm run deploy:workflow
-   ```
-   - This command will:
-     - Validate the workflow file
-     - Deploy it to the MCP Server
-     - Update the workspace memory
-     - Trigger a new release if version changes
-
-3. **Update Workflow**
-   ```bash
-   npm run deploy:workflow --update
-   ```
-   - This command will:
-     - Validate the workflow file
-     - Deploy it to the MCP Server
-     - Update the workspace memory
-     - Trigger a new release if version changes
-
-4. **Delete Workflow**
-   ```bash
-   npm run deploy:workflow --delete
-   ```
-   - This command will:
-     - Validate the workflow file
-     - Delete it from the MCP Server
-     - Update the workspace memory
-     - Trigger a new release if version changes
+2. **Manage Workflows**
+   - Use MCP tools to create, update, and delete workflows
+   - Workflows are managed interactively through the MCP server
+   - No automated deployment - all changes are manual and controlled
 
 ### Important: Update Workspace Memory
 
@@ -272,7 +232,7 @@ The MCP Server provides a centralized management interface for deploying, updati
 2. **Update workspace memory** with new project details, features, and configurations
 3. **Verify alignment** with general memory requirements and project standards
 
-This ensures that AI agents working with the project have access to current and accurate information about the project's capabilities, structure, deployment process, and MCP-based workflow management.
+This ensures that AI agents working with the project have access to current and accurate information about the project's capabilities, structure, and MCP-based workflow management.
 
 ### MCP Server Configuration
 
@@ -287,27 +247,9 @@ The MCP Server requires proper configuration for workflow management:
    - Use `.config.json` for multi-instance setup
    - Or `.env` file for single-instance setup
 
-### Manual Deployment
 
-For testing or emergency deployments:
 
-```bash
-# Set environment variables
-export N8N_API_URL="https://n8n.informedcrew.com"
-export N8N_API_KEY="your-api-key"
-export N8N_WORKFLOW_ID="your-workflow-id"
 
-# Deploy workflow
-npm run deploy:workflow
-```
-
-### Deployment Configuration
-
-Required GitHub secrets for automated deployment:
-
-- `N8N_API_URL`: n8n instance URL
-- `N8N_API_KEY`: n8n API key
-- `N8N_WORKFLOW_ID`: Target workflow ID
 
 ## Troubleshooting
 
@@ -328,12 +270,7 @@ Required GitHub secrets for automated deployment:
    - Check n8n API connectivity
    - Verify workflow permissions
 
-4. **Deployment Failures**
-   - Check GitHub secrets configuration
-   - Verify n8n API credentials
-   - Ensure workflow ID exists
-
-5. **Version Conflicts**
+4. **Version Conflicts**
    - Check for existing version tags
    - Ensure proper commit history
    - Verify semantic-release configuration

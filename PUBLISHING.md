@@ -1,28 +1,19 @@
-# Automated Workflow Deployment and MCP-Based Management
+# MCP-Based Workflow Management
 
-This guide provides instructions for the automated deployment of n8n workflows to `n8n.informedcrew.com` using semantic versioning, GitHub Actions, and MCP (Model Context Protocol) tools for interactive management.
+This guide provides instructions for managing n8n workflows using MCP (Model Context Protocol) tools with semantic versioning for release management.
 
 ## Prerequisites
 
-Before deploying workflows, make sure you have:
+Before managing workflows, make sure you have:
 
 1. Access to n8n.informedcrew.com with API permissions
-2. GitHub repository with configured secrets
-3. MCP server configured with n8n-workflow-builder (for interactive management)
-4. Properly configured package.json with semantic versioning
-5. All changes committed to git using conventional commits
+2. MCP server configured with n8n-workflow-builder
+3. Properly configured package.json with semantic versioning
+4. All changes committed to git using conventional commits
 
-## Deployment and Management Process
+## Workflow Management Process
 
-### 1. Configure GitHub Secrets
-
-Set up the following secrets in your GitHub repository:
-
-- `N8N_API_URL`: The n8n instance URL (e.g., `https://n8n.informedcrew.com`)
-- `N8N_API_KEY`: Your n8n API key
-- `N8N_WORKFLOW_ID`: The ID of the workflow to update
-
-### 2. Configure MCP Server (Optional)
+### 1. Configure MCP Server
 
 For interactive workflow management, set up the n8n-workflow-builder MCP server:
 
@@ -72,31 +63,21 @@ git commit -m "workflow-refactor: optimize search performance"
 
 ### 3. Push to Main Branch
 
-Push your changes to the main branch to trigger automated deployment and semantic versioning:
+Push your changes to the main branch to trigger semantic versioning:
 
 ```bash
 git push origin main
 ```
 
-### 4. Automated Deployment and Release Process
+### 4. Semantic Release Process
 
 The GitHub Actions workflow will automatically:
 
 1. **Build and Test**: Compile the project and run tests
-2. **Deploy Workflow**: Update the workflow in n8n.informedcrew.com
-3. **Create Release**: Generate new version and changelog using semantic-release
-4. **Tag Release**: Create GitHub release with version tag
+2. **Create Release**: Generate new version and changelog using semantic-release
+3. **Tag Release**: Create GitHub release with version tag
 
-### 5. Verify Deployment and Manage Workflows
-
-After deployment, verify that the workflow is updated in n8n:
-
-1. Log into n8n.informedcrew.com
-2. Navigate to the updated workflow
-3. Check that changes are reflected
-4. Test the workflow functionality
-
-### 6. MCP-Based Workflow Management (Optional)
+### 5. MCP-Based Workflow Management
 
 Use MCP tools to manage workflows interactively:
 
