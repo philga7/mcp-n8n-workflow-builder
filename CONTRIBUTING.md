@@ -1,6 +1,6 @@
 # Contributing to n8n Workflow Builder
 
-Thank you for your interest in contributing to the n8n Workflow Builder MCP Server! This document provides guidelines for contributing to the project, with a focus on semantic versioning and workflow deployment.
+Thank you for your interest in contributing to the n8n Workflow Builder MCP Server! This document provides guidelines for contributing to the project, with a focus on semantic versioning and MCP-based workflow management.
 
 ## Table of Contents
 
@@ -10,7 +10,7 @@ Thank you for your interest in contributing to the n8n Workflow Builder MCP Serv
 - [Workflow Development](#workflow-development)
 - [Pull Request Process](#pull-request-process)
 - [Semantic Versioning](#semantic-versioning)
-- [Deployment Process](#deployment-process)
+- [MCP-Based Workflow Management](#mcp-based-workflow-management)
 
 ## Code of Conduct
 
@@ -23,7 +23,7 @@ This project and everyone participating in it is governed by our Code of Conduct
 - Node.js (v14+ recommended)
 - npm
 - Git
-- Access to n8n.informedcrew.com (for testing deployments)
+- Access to n8n.informedcrew.com (for testing workflows)
 
 ### Development Setup
 
@@ -41,7 +41,7 @@ This project and everyone participating in it is governed by our Code of Conduct
 3. **Configure environment**
    - Copy `.config.json.example` to `.config.json`
    - Add your n8n API credentials
-   - Set up GitHub secrets for automated deployment
+   - Set up MCP server configuration
 
 4. **Build the project**
    ```bash
@@ -204,20 +204,25 @@ The semantic-release tool automatically:
 | `docs`, `workflow-docs` | PATCH | Documentation updates |
 | `style`, `chore` | None | No version bump |
 
-## Deployment Process
 
-### Automated Deployment
 
-1. **Push to main branch**
-   - Triggers GitHub Actions workflow
-   - Runs tests and validation
-   - Deploys to n8n.informedcrew.com
+## MCP-Based Workflow Management
 
-2. **Release Process**
-   - Semantic-release analyzes commits
-   - Creates new version if needed
-   - Generates changelog
-   - Creates GitHub release
+### Overview
+
+The MCP Server provides a centralized management interface for deploying, updating, and monitoring workflows.
+
+### Workflow Deployment
+
+1. **Prepare Workflow File**
+   - Ensure your workflow file is in JSON format
+   - Place it in the `workflows/` directory
+   - Name it descriptively (e.g., `cipher-weaviate-integration.json`)
+
+2. **Manage Workflows**
+   - Use MCP tools to create, update, and delete workflows
+   - Workflows are managed interactively through the MCP server
+   - No automated deployment - all changes are manual and controlled
 
 ### Important: Update Workspace Memory
 
@@ -227,29 +232,24 @@ The semantic-release tool automatically:
 2. **Update workspace memory** with new project details, features, and configurations
 3. **Verify alignment** with general memory requirements and project standards
 
-This ensures that AI agents working with the project have access to current and accurate information about the project's capabilities, structure, and deployment process.
+This ensures that AI agents working with the project have access to current and accurate information about the project's capabilities, structure, and MCP-based workflow management.
 
-### Manual Deployment
+### MCP Server Configuration
 
-For testing or emergency deployments:
+The MCP Server requires proper configuration for workflow management:
 
-```bash
-# Set environment variables
-export N8N_API_URL="https://n8n.informedcrew.com"
-export N8N_API_KEY="your-api-key"
-export N8N_WORKFLOW_ID="your-workflow-id"
+1. **Environment Variables**
+   - `N8N_HOST`: n8n instance URL
+   - `N8N_API_KEY`: n8n API key
+   - `MCP_PORT`: MCP server port (optional)
 
-# Deploy workflow
-npm run deploy:workflow
-```
+2. **Configuration File**
+   - Use `.config.json` for multi-instance setup
+   - Or `.env` file for single-instance setup
 
-### Deployment Configuration
 
-Required GitHub secrets for automated deployment:
 
-- `N8N_API_URL`: n8n instance URL
-- `N8N_API_KEY`: n8n API key
-- `N8N_WORKFLOW_ID`: Target workflow ID
+
 
 ## Troubleshooting
 
@@ -260,12 +260,17 @@ Required GitHub secrets for automated deployment:
    - Use appropriate commit types
    - Include descriptive messages
 
-2. **Deployment Failures**
-   - Check GitHub secrets configuration
+2. **MCP Connection Issues**
+   - Check MCP server configuration
    - Verify n8n API credentials
-   - Ensure workflow ID exists
+   - Ensure MCP server is running
 
-3. **Version Conflicts**
+3. **Workflow Deployment Failures**
+   - Validate workflow JSON format
+   - Check n8n API connectivity
+   - Verify workflow permissions
+
+4. **Version Conflicts**
    - Check for existing version tags
    - Ensure proper commit history
    - Verify semantic-release configuration
