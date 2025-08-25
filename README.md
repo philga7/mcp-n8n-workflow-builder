@@ -9,6 +9,12 @@ This project provides an MCP (Model Context Protocol) server for managing n8n wo
 
 ***PLEASE, be aware if you dont limit permissions for actions of MCP, it could remove your workflow***
 
+
+![image](https://github.com/user-attachments/assets/6849a1de-6048-474d-8477-5f3fdb854196)
+
+
+***PLEASE, be aware if you dont limit permissions for actions of MCP, it could remove your workflow***
+
 **Key Features:**
 - Full integration with Claude AI and Cursor IDE via MCP protocol
 - **Multi-instance support** - Manage multiple n8n environments (production, staging, development)
@@ -569,15 +575,16 @@ If you encounter the error `node.parameters.values.map is not a function` when c
 
 This usually happens when creating workflows with Set nodes that use the newer n8n parameter structure. Version 0.7.2+ includes a fix that supports both the legacy array format and the newer object-based format for Set node parameters.
 
-## Semantic Versioning and MCP-Based Workflow Management
+## Semantic Versioning and Automated Deployment
 
-This project uses semantic versioning with MCP-based workflow management. The versioning system follows the [Conventional Commits](https://www.conventionalcommits.org/) specification and automatically generates changelogs and releases.
+This project uses semantic versioning with automated deployment to `n8n.informedcrew.com`. The versioning system follows the [Conventional Commits](https://www.conventionalcommits.org/) specification and automatically generates changelogs and releases.
 
 ### Version Management
 
 - **Automated Versioning**: Uses semantic-release to automatically determine version bumps based on commit messages
 - **Conventional Commits**: All commits follow the conventional commits format for automatic versioning
 - **MCP-Based Workflow Management**: Workflows are managed through MCP tools with interactive control
+- **Automated Deployment**: Workflows are automatically deployed to `n8n.informedcrew.com` via GitHub Actions
 - **Changelog Generation**: Automatic changelog generation based on commit history
 
 ### Commit Message Format
@@ -599,13 +606,14 @@ All commits must follow the conventional commits format:
 - `workflow-fix`: Workflow bug fixes (patch version bump)
 - `workflow-refactor`: Workflow improvements (patch version bump)
 
-### Workflow Management Process
+### Workflow Management and Deployment Process
 
 1. **Development**: Make changes to workflows in the `workflows/` directory
 2. **Commit**: Use conventional commit format for all changes
-3. **Push**: Push to main branch triggers semantic versioning
-4. **Release**: Semantic-release creates new version and changelog
-5. **Deploy**: Use MCP tools to manage workflows in n8n
+3. **Push**: Push to main branch triggers automated deployment
+4. **Deploy**: GitHub Actions automatically deploys to `n8n.informedcrew.com`
+5. **Release**: Semantic-release creates new version and changelog
+6. **Manage**: Use MCP tools to manage workflows in n8n
 
 For more details, see [CONTRIBUTING.md](CONTRIBUTING.md) and [PUBLISHING.md](PUBLISHING.md).
 
