@@ -1,7 +1,7 @@
 
 # n8n Workflow Builder MCP Server
 
-This project provides an MCP (Model Context Protocol) server for managing n8n workflows. It allows you to create, update, delete, activate, and deactivate workflows through a set of tools available in Claude AI and Cursor IDE.
+This project provides an MCP (Model Context Protocol) server for managing n8n workflows through Claude AI and Cursor IDE. It allows you to create, update, delete, activate, and deactivate workflows using MCP-based tools with semantic versioning for release management.
 
 
 ![image](https://github.com/user-attachments/assets/6849a1de-6048-474d-8477-5f3fdb854196)
@@ -15,6 +15,7 @@ This project provides an MCP (Model Context Protocol) server for managing n8n wo
 - Create and manage n8n workflows via natural language
 - Predefined workflow templates through prompts system
 - Interactive workflow building with real-time feedback
+- MCP-based workflow management with semantic versioning
 - Backward compatible with existing single-instance setups
 
 ![image](https://github.com/user-attachments/assets/e25e86ea-882e-47c4-b822-99f56d1e7f99)
@@ -568,15 +569,15 @@ If you encounter the error `node.parameters.values.map is not a function` when c
 
 This usually happens when creating workflows with Set nodes that use the newer n8n parameter structure. Version 0.7.2+ includes a fix that supports both the legacy array format and the newer object-based format for Set node parameters.
 
-## Semantic Versioning and Automated Deployment
+## Semantic Versioning and MCP-Based Workflow Management
 
-This project uses semantic versioning with automated deployment to `n8n.informedcrew.com`. The versioning system follows the [Conventional Commits](https://www.conventionalcommits.org/) specification and automatically generates changelogs and releases.
+This project uses semantic versioning with MCP-based workflow management. The versioning system follows the [Conventional Commits](https://www.conventionalcommits.org/) specification and automatically generates changelogs and releases.
 
 ### Version Management
 
 - **Automated Versioning**: Uses semantic-release to automatically determine version bumps based on commit messages
 - **Conventional Commits**: All commits follow the conventional commits format for automatic versioning
-- **Automated Deployment**: Workflows are automatically deployed to `n8n.informedcrew.com` via GitHub Actions
+- **MCP-Based Workflow Management**: Workflows are managed through MCP tools with interactive control
 - **Changelog Generation**: Automatic changelog generation based on commit history
 
 ### Commit Message Format
@@ -591,20 +592,20 @@ All commits must follow the conventional commits format:
 [optional footer(s)]
 ```
 
-**Types for workflow deployments:**
+**Types for workflow changes:**
 - `feat`: New workflow features (minor version bump)
 - `fix`: Bug fixes in workflows (patch version bump)
 - `workflow-feat`: New workflow functionality (minor version bump)
 - `workflow-fix`: Workflow bug fixes (patch version bump)
 - `workflow-refactor`: Workflow improvements (patch version bump)
 
-### Deployment Process
+### Workflow Management Process
 
 1. **Development**: Make changes to workflows in the `workflows/` directory
 2. **Commit**: Use conventional commit format for all changes
-3. **Push**: Push to main branch triggers automated deployment
-4. **Deploy**: GitHub Actions automatically deploys to `n8n.informedcrew.com`
-5. **Release**: Semantic-release creates new version and changelog
+3. **Push**: Push to main branch triggers semantic versioning
+4. **Release**: Semantic-release creates new version and changelog
+5. **Deploy**: Use MCP tools to manage workflows in n8n
 
 For more details, see [CONTRIBUTING.md](CONTRIBUTING.md) and [PUBLISHING.md](PUBLISHING.md).
 

@@ -1,25 +1,50 @@
-# Automated Workflow Deployment
+# MCP-Based Workflow Management
 
-This guide provides instructions for the automated deployment of n8n workflows to `n8n.informedcrew.com` using semantic versioning and GitHub Actions.
+This guide provides instructions for managing n8n workflows using MCP (Model Context Protocol) tools with semantic versioning for release management.
 
 ## Prerequisites
 
-Before deploying workflows, make sure you have:
+Before managing workflows, make sure you have:
 
 1. Access to n8n.informedcrew.com with API permissions
-2. GitHub repository with configured secrets
+2. MCP server configured with n8n-workflow-builder
 3. Properly configured package.json with semantic versioning
 4. All changes committed to git using conventional commits
 
-## Deployment Process
+## Workflow Management Process
 
-### 1. Configure GitHub Secrets
+### 1. Configure MCP Server
 
-Set up the following secrets in your GitHub repository:
+Set up the n8n-workflow-builder MCP server in your development environment:
 
-- `N8N_API_URL`: The n8n instance URL (e.g., `https://n8n.informedcrew.com`)
-- `N8N_API_KEY`: Your n8n API key
-- `N8N_WORKFLOW_ID`: The ID of the workflow to update
+```json
+{
+  "n8n-workflow-builder": {
+    "command": "node",
+    "args": ["path/to/your/project/build/index.js"],
+    "env": {
+      "N8N_HOST": "https://n8n.informedcrew.com/api/v1/",
+      "N8N_API_KEY": "your_n8n_api_key_here",
+      "MCP_PORT": "3456"
+    },
+    "disabled": false,
+    "alwaysAllow": [
+      "list_workflows",
+      "get_workflow",
+      "list_executions",
+      "get_execution"
+    ],
+    "autoApprove": [
+      "create_workflow",
+      "update_workflow",
+      "activate_workflow",
+      "deactivate_workflow",
+      "delete_workflow",
+      "delete_execution"
+    ]
+  }
+}
+```
 
 ### 2. Commit Changes Using Conventional Commits
 
@@ -38,44 +63,44 @@ git commit -m "workflow-refactor: optimize search performance"
 
 ### 3. Push to Main Branch
 
-Push your changes to the main branch to trigger automated deployment:
+Push your changes to the main branch to trigger semantic versioning:
 
 ```bash
 git push origin main
 ```
 
-### 4. Automated Deployment Process
+### 4. Semantic Release Process
 
 The GitHub Actions workflow will automatically:
 
 1. **Build and Test**: Compile the project and run tests
-2. **Deploy Workflow**: Update the workflow in n8n.informedcrew.com
-3. **Create Release**: Generate new version and changelog using semantic-release
-4. **Tag Release**: Create GitHub release with version tag
+2. **Create Release**: Generate new version and changelog using semantic-release
+3. **Tag Release**: Create GitHub release with version tag
 
-### 5. Verify Deployment
+### 5. MCP-Based Workflow Management
 
-After deployment, verify that the workflow is updated in n8n:
+Use MCP tools to manage workflows interactively:
 
-1. Log into n8n.informedcrew.com
-2. Navigate to the updated workflow
-3. Check that changes are reflected
-4. Test the workflow functionality
+- **List workflows**: View all available workflows
+- **Create workflow**: Build new workflows from templates
+- **Update workflow**: Modify existing workflows
+- **Activate/Deactivate**: Control workflow execution
+- **Execute workflow**: Manually trigger workflow runs
 
 ## Troubleshooting
 
-### Deployment Failures
+### MCP Connection Issues
 
-If deployment fails, check the following:
+If MCP tools are not working:
 
-1. **GitHub Secrets Configuration**
-   - Verify all required secrets are set
-   - Check that API keys are valid and not expired
-   - Ensure workflow ID exists in n8n
+1. **Check MCP Server Configuration**
+   - Verify the server is running on the correct port
+   - Ensure API credentials are correct
+   - Check that the server is accessible
 
 2. **Authentication Errors**
    ```bash
-   # Test API access manually
+   # Test n8n API access manually
    curl -H "X-N8N-API-KEY: your-api-key" \
         https://n8n.informedcrew.com/api/v1/workflows
    ```
@@ -104,18 +129,19 @@ If you encounter version conflicts:
    npm run release:dry-run
    ```
 
-## Manual Deployment
+## Manual Workflow Management
 
-For emergency deployments or testing:
+For direct workflow management using MCP tools:
 
 ```bash
-# Set environment variables
-export N8N_API_URL="https://n8n.informedcrew.com"
-export N8N_API_KEY="your-api-key"
-export N8N_WORKFLOW_ID="your-workflow-id"
+# Start the MCP server
+npm run start
 
-# Deploy workflow
-npm run deploy:workflow
+# Use MCP tools through your IDE or CLI
+# - list_workflows: View all workflows
+# - create_workflow: Create new workflow
+# - update_workflow: Modify existing workflow
+# - activate_workflow: Enable workflow execution
 ```
 
 ## Future Updates
@@ -124,5 +150,5 @@ To update workflows in the future:
 
 1. Make your workflow changes
 2. Commit using conventional commits format
-3. Push to main branch
-4. Automated deployment will handle the rest 
+3. Push to main branch for semantic versioning
+4. Use MCP tools to deploy and manage workflows 
